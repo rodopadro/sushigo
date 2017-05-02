@@ -8,8 +8,11 @@ function generateDeck(){
   console.log(urlRef.key);
   urlRef.once("value", function(snapshot) {
   snapshot.forEach(function(child) {
-    console.log(child.key+": "+child.val());
+    console.log("Nombre: "+child.child("nombre").val());
+    console.log("Tipo: "+child.child("tipo").val());
+    console.log("Cantidad: "+child.child("cantidad").val());
+    console.log("Valor: "+child.child("valor").val());
+    console.log("Src: "+child.child("src").val());
   });
 });
 }
-//http://imgur.com/gallery/Oz8LELN
