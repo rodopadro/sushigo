@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const config = require('./config');
 const index = require('./routes/index');
 const users = require('./routes/users');
+import {Game} from './routes/Game';
 
 const app = express();
 
@@ -48,3 +49,50 @@ app.use(function(err, req, res, next) {
 const server = app.listen(8080, () => console.log("Listening to localhost:", 8080));
 
 const io = require('socket.io')(server);
+
+function socketFunctions(socket){
+	let rooms = [];
+	let gm = new Game(0, 0, "Season");
+	socket.on('addPlayer', gm.addPlayer);
+
+	socket.on('disconnect', () => {
+		console.log('user disconnected');
+		socket.leave(socket.room);
+		gm.exitPlayer();
+	});
+
+	socket.on('createRooms', (roomName, username) => {
+		rooms.push(roomName);
+		socket.join(roomName);
+		socket.room = roomName;
+		socket.username = username;
+		socket.to(roomName).emit('addPlayer', username);
+		console.log(`User ${username} created ${roomName}`);
+	});
+
+	socket.on('cardPicked', (card)=>{
+		socket.to(socket.room).emit('updateBoard', socket.username, card);
+	});
+
+	socket.on('updateScores', (score)=>{
+
+	});
+
+	socket.on('connectToRoom', (roomName, username)=>{
+		if(rooms.includes(roomName)){
+			if(!gm.isFull()){
+				socket.join(roomName);
+				socket.emit('addPlayer', username);
+				console.log(`User ${username} joined ${roomName}`);
+			}else {
+				socket.emit('error', 'This room is full');
+			}
+		}else{
+			socket.emit('error', 'There is not such room');
+		}
+
+	});
+
+}
+
+io.on("connection", socketFunctions );
