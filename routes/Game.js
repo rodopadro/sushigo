@@ -61,7 +61,7 @@ class Game{
 	}
 
 	addPlayer(Player){
-		//Game._players.push(Player);
+		this._players[this.count] = Player;
 		console.log("Player added", Player, this.counter);
 	}
 

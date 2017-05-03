@@ -51,8 +51,8 @@ const server = app.listen(8080, () => console.log("Listening to localhost:", 808
 const io = require('socket.io')(server);
 
 let gm;
+let rooms = [];
 function socketFunctions(socket){
-	let rooms = [];
 
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
@@ -68,6 +68,7 @@ function socketFunctions(socket){
 		socket.username = username;
 		socket.to(roomName).emit('addPlayer', username);
 		console.log(`User ${username} created ${roomName}`);
+
 	});
 
 	socket.on('cardPicked', (card, Player)=>{
@@ -78,7 +79,7 @@ function socketFunctions(socket){
 		socket.to(socket.room).emit('updateScores', Player, score);
 	});
 
-	socket.on('playerReady', (Player)=>{
+	socket.on('playerReady', ()=>{
 		gm.addPlayerReady();
 		if(gm.allPlayersReady()){
 			socket.to(socket.room).emit('startGame');
@@ -102,7 +103,6 @@ function socketFunctions(socket){
 		}else{
 			socket.emit('error', 'There is not such room');
 		}
-
 	});
 
 }

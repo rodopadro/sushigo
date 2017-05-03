@@ -15,4 +15,8 @@ socket.on('updateBoard', (Player, card) => {
 
 });
 
+socket.on('getHand', (Hands)=>{
+
+});
+
 
