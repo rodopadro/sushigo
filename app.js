@@ -52,6 +52,7 @@ const io = require('socket.io')(server);
 
 let gm;
 let rooms = [];
+
 function socketFunctions(socket){
 
 	socket.on('disconnect', () => {
@@ -87,7 +88,7 @@ function socketFunctions(socket){
 	});
 
 	socket.on('startGame', ()=>{
-
+		gm.startGame();
 	});
 
 	socket.on('connectToRoom', (roomName, username)=>{

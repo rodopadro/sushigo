@@ -2,39 +2,18 @@
  * Created by RPadro on 01/05/2017.
  */
 import {Player} from './Player';
+import {Card} from './Card';
+const firebase = require('firebase');
 
 class Game{
-	/*
-	//main deck array 108 cards
-	let deck=[];
-	let shuffleArray=[];
-	//array with the players objects
-	let playersArray = [];
-*/
+
 	constructor(){
 		this._players = [];
 		this._counter = 0;
 		this._deck = [];
 		this._playersReady = 0;
+		this._shuffleArray = [];
 	}
-
-
-	/*class card{
-		constructor(nombre,src,tipo,valor){
-			this.name = nombre;
-			this.src = src;
-			this.type = tipo;
-			this.value = valor;
-		}
-	}
-
-	class player{
-		constructor(nombre){
-			this.name = nombre;
-			this.onPlay = [];
-			this.onHand = [];
-		}
-	}*/
 	
 	shuffle(array){
 	  	let currentIndex = array.length, temporaryValue, randomIndex;
@@ -56,117 +35,62 @@ class Game{
 	}
 
 	initDeck(){
-		shuffleArray = [];
-		playersArray = [];
-		shuffleArray = shuffle(deck);
+		this.generator();
+		this._shuffleArray = shuffle(this._deck);
 		for (let i = 0; i < 9; i++) {
-			console.log(shuffleArray[i].name);
+			console.log(this._shuffleArray[i].name);
 		}
 	}
 
 	startGame(numplayers){
-		let player1, player2, player3, player4, player5;
 		this.initDeck();
 
 		switch(this.count){
 			case 2:
 				console.log("2 players");
-				player1 = new Player("felix");
-				player2 = new Player("Brayan");
 
 				for (let i=0; i < 20; i++) {
-					player1._onHand[i]= shuffleArray[i++];
-					player2._onHand[i] = shuffleArray[i];
+					this._players[0]._onHand[i]= this._shuffleArray[i++];
+					this._players[1]._onHand[i] = this._shuffleArray[i];
 				}
-
-				playersArray.push(player1);
-				playersArray.push(player2);
-
 
 				break;
 			case 3:
 				console.log("3 players");
 
-				player1 = new Player("felix");
-				player2 = new Player("Brayan");
-				player3 = new Player("fer");
-
 				for (let i=0; i < 27; i++) {
-					player1._onHand[i] = shuffleArray[i++];
-					player2._onHand[i] = shuffleArray[i++];
-					player3._onHand[i] = shuffleArray[i];
+					this._players[0]._onHand[i]= this._shuffleArray[i++];
+					this._players[1]._onHand[i] = this._shuffleArray[i++];
+					this._players[2]._onHand[i] = this._shuffleArray[i];
 				}
-
-				playersArray.push(player1);
-				playersArray.push(player2);
-				playersArray.push(player3);
 
 				break;
 			case 4:
 				console.log("4 players");
 
-				player1 = new Player("felix");
-				player2 = new Player("Brayan");
-				player3 = new Player("fer");
-				player4 = new Player("rodo");
-
 				for (let i=0; i < 32; i++) {
-					player1._onHand[i] = shuffleArray[i++];
-					player2._onHand[i] = shuffleArray[i++];
-					player3._onHand[i] = shuffleArray[i++];
-					player4._onHand[i] = shuffleArray[i];
-				}
 
-				playersArray.push(player1);
-				playersArray.push(player2);
-				playersArray.push(player3);
-				playersArray.push(player4);
+					this._players[0]._onHand[i]= this._shuffleArray[i++];
+					this._players[1]._onHand[i] = this._shuffleArray[i++];
+					this._players[2]._onHand[i] = this._shuffleArray[i++];
+					this._players[3]._onHand[i] = this._shuffleArray[i];
+				}
 
 				break;
 			case 5:
 				console.log("5 players");
 
-				player1 = new Player("felix");
-				player2 = new Player("Brayan");
-				player3 = new Player("fer");
-				player4 = new Player("rodo");
-				player5 = new Player("rodo");
-
 				for (let i=0; i < 42; i++) {
-					player1._onHand[i] = shuffleArray[i++];
-					player2._onHand[i] = shuffleArray[i++];
-					player3._onHand[i] = shuffleArray[i++];
-					player4._onHand[i] = shuffleArray[i++];
-					player4._onHand[i] = shuffleArray[i];
+					this._players[0]._onHand[i]= this._shuffleArray[i++];
+					this._players[1]._onHand[i] = this._shuffleArray[i++];
+					this._players[2]._onHand[i] = this._shuffleArray[i++];
+					this._players[3]._onHand[i] = this._shuffleArray[i++];
+					this._players[4]._onHand[i] = this._shuffleArray[i];
 				}
-
-				playersArray.push(player1);
-				playersArray.push(player2);
-				playersArray.push(player3);
-				playersArray.push(player4);
-				playersArray.push(player5);
-
 				break;
 			default:
-
+				break;
 		}
-
-
-		console.log("number of players "+ playersArray.length);
-
-
-		console.log("player1 first card1 "+playersArray[0]._onHand[0].name);
-		console.log("player1 first card2 "+playersArray[1]._onHand[0].name);
-		console.log("player1 first card2 "+playersArray[2]._onHand[0].name);
-		console.log("player1 first card2 "+playersArray[3]._onHand[0].name);
-		console.log("player1 first card2 "+playersArray[4]._onHand[0].name);
-
-		//swaponHand(playersArray,2);
-
-		console.log(playersArray[0]._onHand.length);
-
-		//while(playersArray[0].onHand!=null){
-		console.log(playersArray[0]._onHand);
 
 	}
 
@@ -232,13 +156,13 @@ class Game{
 
 	exitPlayer(Player){
 		let index = Game._players.indexOf(Player);
-		Game._players.slice(index, 1);
+		this._players.slice(index, 1);
 		console.log("Player exited", this.reducer);
 	}
 
 	//GET DATA FROM FIREBASE----------------------------------------------------
 	generateDeck(){
-		return new Promise(function(resolve,reject){
+		return new Promise(function(resolve, reject){
 
 			deck = [];
 			let ref = firebase.database().ref();
@@ -252,12 +176,11 @@ class Game{
 			    let tipo = child.child("tipo").val();
 			    let valor = child.child("valor").val();
 			    let src = child.child("src").val();
-
+			    let newcard;
 
 			    for (let i = 0; i < cantidad; i++) {
-				let newcard = new card(nombre,src,tipo,valor);
-				deck.push(newcard);
-
+					newcard = new Card(nombre,src,tipo,valor);
+					this._deck.push(newcard);
 			    }
 
 
@@ -272,7 +195,7 @@ class Game{
 		this.generateDeck().then((newdeck) => {
 			console.log("primera carta: " + newdeck[107].type);
 			this.deck = newdeck;
-			console.log(deck.length);
+			console.log();
 		});
 	}
 
