@@ -1,5 +1,3 @@
-
-
 function generateDeck(){
   console.log("Hola");
   var ref = firebase.database().ref();
@@ -16,3 +14,13 @@ function generateDeck(){
   });
 });
 }
+
+
+$(document).ready(function () {
+  $('div.contecarta').click(function() {
+      var id = $(this).attr('id');
+      console.log(id);
+      $( "#"+id ).remove();
+      return false;
+  });
+});
