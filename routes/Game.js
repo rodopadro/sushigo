@@ -226,7 +226,7 @@ class Game{
 	}
 
 	//GET DATA FROM FIREBASE----------------------------------------------------
-	function generateDeck(){
+	generateDeck(){
 		return new Promise(function(resolve,reject){
 
 			deck = [];
