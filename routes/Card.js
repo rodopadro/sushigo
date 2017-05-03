@@ -39,3 +39,4 @@ class Card {
 	}
   
 }
+export {Card};

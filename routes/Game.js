@@ -14,6 +14,7 @@ class Game{
 	constructor(){
 		this._players = [];
 		this._counter = 0;
+		this._deck = [];
 		this._playersReady = 0;
 	}
 
@@ -65,17 +66,17 @@ class Game{
 
 	startGame(numplayers){
 		let player1, player2, player3, player4, player5;
-		initDeck();
+		this.initDeck();
 
-		switch(this._players){
+		switch(this.count){
 			case 2:
 				console.log("2 players");
 				player1 = new Player("felix");
 				player2 = new Player("Brayan");
 
-				for (let cont=0,i=0,y=1; cont < 10; i+=2,y+=2,cont++) {
-					player1._onHand.push(shuffleArray[i]);
-					player2._onHand.push(shuffleArray[y]);
+				for (let i=0; i < 20; i++) {
+					player1._onHand[i]= shuffleArray[i++];
+					player2._onHand[i] = shuffleArray[i];
 				}
 
 				playersArray.push(player1);
@@ -90,10 +91,10 @@ class Game{
 				player2 = new Player("Brayan");
 				player3 = new Player("fer");
 
-				for (let cont=0,i=0,y=1,z=2; cont < 9; i+=3,y+=3,z+=3,cont++) {
-					player1._onHand.push(shuffleArray[i]);
-					player2._onHand.push(shuffleArray[y]);
-					player3._onHand.push(shuffleArray[z]);
+				for (let i=0; i < 27; i++) {
+					player1._onHand[i] = shuffleArray[i++];
+					player2._onHand[i] = shuffleArray[i++];
+					player3._onHand[i] = shuffleArray[i];
 				}
 
 				playersArray.push(player1);
@@ -104,16 +105,16 @@ class Game{
 			case 4:
 				console.log("4 players");
 
-				player1 = new player("felix");
-				player2 = new player("Brayan");
-				player3 = new player("fer");
-				player4 = new player("rodo");
+				player1 = new Player("felix");
+				player2 = new Player("Brayan");
+				player3 = new Player("fer");
+				player4 = new Player("rodo");
 
-				for (let cont=0,i=0,y=1,z=2,w=3; cont < 8; i+=4,y+=4,z+=4,w+=4,cont++) {
-					player1._onHand.push(shuffleArray[i]);
-					player2._onHand.push(shuffleArray[y]);
-					player3._onHand.push(shuffleArray[z]);
-					player4._onHand.push(shuffleArray[w]);
+				for (let i=0; i < 32; i++) {
+					player1._onHand[i] = shuffleArray[i++];
+					player2._onHand[i] = shuffleArray[i++];
+					player3._onHand[i] = shuffleArray[i++];
+					player4._onHand[i] = shuffleArray[i];
 				}
 
 				playersArray.push(player1);
@@ -131,12 +132,12 @@ class Game{
 				player4 = new Player("rodo");
 				player5 = new Player("rodo");
 
-				for (let cont=0,i=0,y=1,z=2,w=3,x=4; cont < 7; i+=5,y+=5,z+=5,w+=5,x+=5,cont++) {
-					player1._onHand.push(shuffleArray[i]);
-					player2._onHand.push(shuffleArray[y]);
-					player3._onHand.push(shuffleArray[z]);
-					player4._onHand.push(shuffleArray[w]);
-					player5._onHand.push(shuffleArray[x]);
+				for (let i=0; i < 42; i++) {
+					player1._onHand[i] = shuffleArray[i++];
+					player2._onHand[i] = shuffleArray[i++];
+					player3._onHand[i] = shuffleArray[i++];
+					player4._onHand[i] = shuffleArray[i++];
+					player4._onHand[i] = shuffleArray[i];
 				}
 
 				playersArray.push(player1);
@@ -167,6 +168,10 @@ class Game{
 		//while(playersArray[0].onHand!=null){
 		console.log(playersArray[0]._onHand);
 
+	}
+
+	set deck(deck){
+		this._deck = deck;
 	}
 	
 
@@ -263,13 +268,13 @@ class Game{
 	
 	};
 
-	generateDeck().then(
-		function(newdeck){
-		console.log("primera carta: " + newdeck[107].type);
-		deck = newdeck;
-		console.log(deck.length);
-	});
-	//----------------------------------------------------------------------------
+	generator(){
+		this.generateDeck().then((newdeck) => {
+			console.log("primera carta: " + newdeck[107].type);
+			this.deck = newdeck;
+			console.log(deck.length);
+		});
+	}
 
 }
 
