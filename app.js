@@ -81,12 +81,15 @@ function socketFunctions(socket){
 	});
 
 	socket.on('cardPicked', (card, username, index)=>{
+		console.log(card);
+		console.log(index);
 		gm.players[socket.index].hand.splice(index, 1);
 		tmp2.push(socket);
 		if(counter++ == gm.count){
 			gm.switchHand();
 			for(let i = 1; i < gm.count; i++){
 				let player = gm.players[tmp2[i].index];
+				console.log(player.hand[index]);
 				tmp2[i].emit('updateHand', player.username, player.hand);
 				tmp2[i].emit('updateBoard', player.username, player.hand[index]);
 				tmp2[i].to(socket.room).broadcast.emit('updateBoard', player.username, player.hand[index]);

@@ -20,6 +20,7 @@ socket.on('updateScores', (Player, score)=>{
 });
 
 socket.on('updateBoard', (Player, card) => {
+	console.log(card);
 	fillRow(Player,card.src);
 });
 
@@ -38,10 +39,11 @@ function populateHand(hand){
 	}
 	$('div.contecarta').click(function() {
 		let id = $(this).attr('id');
-		$( "#"+id ).remove();
-		console.log("Removiendo lugar:" + id);
 		console.log(myhand[id]);
 		socket.emit('cardPicked', myhand[id], username, id);
+		$( "#"+id ).remove();
+		console.log("Removiendo lugar:" + id);
+
 		myhand.splice(id,1);
 		console.log(myhand);
 		return false;
