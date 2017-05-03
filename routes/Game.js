@@ -17,7 +17,7 @@ class Game{
 	}
 
 
-	class card{
+	/*class card{
 		constructor(nombre,src,tipo,valor){
 			this.name = nombre;
 			this.src = src;
@@ -32,7 +32,7 @@ class Game{
 			this.onPlay = [];
 			this.onHand = [];
 		}
-	}
+	}*/
 	
 	shuffle(array){
 	  	var currentIndex = array.length, temporaryValue, randomIndex;
@@ -73,8 +73,8 @@ class Game{
 				var player2 = new player("Brayan");
 
 				for (var cont=0,i=0,y=1; cont < 10; i+=2,y+=2,cont++) {
-					player1.onHand.push(shuffleArray[i]);
-					player2.onHand.push(shuffleArray[y]);
+					player1._onHand.push(shuffleArray[i]);
+					player2._onHand.push(shuffleArray[y]);
 				}
 
 				playersArray.push(player1);
@@ -90,9 +90,9 @@ class Game{
 				var player3 = new player("fer");
 
 				for (var cont=0,i=0,y=1,z=2; cont < 9; i+=3,y+=3,z+=3,cont++) {
-					player1.onHand.push(shuffleArray[i]);
-					player2.onHand.push(shuffleArray[y]);
-					player3.onHand.push(shuffleArray[z]);
+					player1._onHand.push(shuffleArray[i]);
+					player2._onHand.push(shuffleArray[y]);
+					player3._onHand.push(shuffleArray[z]);
 				}
 
 				playersArray.push(player1);
@@ -109,10 +109,10 @@ class Game{
 				var player4 = new player("rodo");
 
 				for (var cont=0,i=0,y=1,z=2,w=3; cont < 8; i+=4,y+=4,z+=4,w+=4,cont++) {
-					player1.onHand.push(shuffleArray[i]);
-					player2.onHand.push(shuffleArray[y]);
-					player3.onHand.push(shuffleArray[z]);
-					player4.onHand.push(shuffleArray[w]);
+					player1._onHand.push(shuffleArray[i]);
+					player2._onHand.push(shuffleArray[y]);
+					player3._onHand.push(shuffleArray[z]);
+					player4._onHand.push(shuffleArray[w]);
 				}
 
 				playersArray.push(player1);
@@ -131,11 +131,11 @@ class Game{
 				var player5 = new player("rodo");
 
 				for (var cont=0,i=0,y=1,z=2,w=3,x=4; cont < 7; i+=5,y+=5,z+=5,w+=5,x+=5,cont++) {
-					player1.onHand.push(shuffleArray[i]);
-					player2.onHand.push(shuffleArray[y]);
-					player3.onHand.push(shuffleArray[z]);
-					player4.onHand.push(shuffleArray[w]);
-					player5.onHand.push(shuffleArray[x]);
+					player1._onHand.push(shuffleArray[i]);
+					player2._onHand.push(shuffleArray[y]);
+					player3._onHand.push(shuffleArray[z]);
+					player4._onHand.push(shuffleArray[w]);
+					player5._onHand.push(shuffleArray[x]);
 				}
 
 				playersArray.push(player1);
@@ -153,18 +153,18 @@ class Game{
 		console.log("number of players "+ playersArray.length);
 
 
-		console.log("player1 first card1 "+playersArray[0].onHand[0].name);
-		console.log("player1 first card2 "+playersArray[1].onHand[0].name);
-		console.log("player1 first card2 "+playersArray[2].onHand[0].name);
-		console.log("player1 first card2 "+playersArray[3].onHand[0].name);
-		console.log("player1 first card2 "+playersArray[4].onHand[0].name);
+		console.log("player1 first card1 "+playersArray[0]._onHand[0].name);
+		console.log("player1 first card2 "+playersArray[1]._onHand[0].name);
+		console.log("player1 first card2 "+playersArray[2]._onHand[0].name);
+		console.log("player1 first card2 "+playersArray[3]._onHand[0].name);
+		console.log("player1 first card2 "+playersArray[4]._onHand[0].name);
 
 		//swaponHand(playersArray,2);
 
-		console.log(playersArray[0].onHand.length);
+		console.log(playersArray[0]._onHand.length);
 
 		//while(playersArray[0].onHand!=null){
-		console.log(playersArray[0].onHand);
+		console.log(playersArray[0]._onHand);
 
 	}
 	
