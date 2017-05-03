@@ -16,17 +16,22 @@ class Game{
 		this._playersReady = 0;
 	}
 
-	card(nombre,src,tipo,valor){
-		this.name = nombre;
-		this.src = src;
-		this.type = tipo;
-		this.value = valor;
-	} 
 
-	player(nombre){
-		this.name = nombre;
-		this.onPlay = [];
-		this.onHand = [];
+	class card{
+		constructor(nombre,src,tipo,valor){
+			this.name = nombre;
+			this.src = src;
+			this.type = tipo;
+			this.value = valor;
+		}
+	}
+
+	class player{
+		constructor(nombre){
+			this.name = nombre;
+			this.onPlay = [];
+			this.onHand = [];
+		}
 	}
 	
 	shuffle(array){
