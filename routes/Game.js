@@ -1,14 +1,15 @@
 /**
  * Created by RPadro on 01/05/2017.
  */
+import {Player} from './Player';
 
 class Game{
 	/*
 	//main deck array 108 cards
-	var deck=[];
-	var shuffleArray=[];
+	let deck=[];
+	let shuffleArray=[];
 	//array with the players objects
-	var playersArray = [];
+	let playersArray = [];
 */
 	constructor(){
 		this._players = [];
@@ -35,7 +36,7 @@ class Game{
 	}*/
 	
 	shuffle(array){
-	  	var currentIndex = array.length, temporaryValue, randomIndex;
+	  	let currentIndex = array.length, temporaryValue, randomIndex;
 
 		  // While there remain elements to shuffle...
 		  while (0 !== currentIndex) {
@@ -57,22 +58,22 @@ class Game{
 		shuffleArray = [];
 		playersArray = [];
 		shuffleArray = shuffle(deck);
-		for (var i = 0; i < 9; i++) {
+		for (let i = 0; i < 9; i++) {
 			console.log(shuffleArray[i].name);
 		}
 	}
 
 	startGame(numplayers){
-
+		let player1, player2, player3, player4, player5;
 		initDeck();
 
-		switch(players){
+		switch(this._players){
 			case 2:
 				console.log("2 players");
-				var player1 = new player("felix");
-				var player2 = new player("Brayan");
+				player1 = new Player("felix");
+				player2 = new Player("Brayan");
 
-				for (var cont=0,i=0,y=1; cont < 10; i+=2,y+=2,cont++) {
+				for (let cont=0,i=0,y=1; cont < 10; i+=2,y+=2,cont++) {
 					player1._onHand.push(shuffleArray[i]);
 					player2._onHand.push(shuffleArray[y]);
 				}
@@ -85,11 +86,11 @@ class Game{
 			case 3:
 				console.log("3 players");
 
-				var player1 = new player("felix");
-				var player2 = new player("Brayan");
-				var player3 = new player("fer");
+				player1 = new Player("felix");
+				player2 = new Player("Brayan");
+				player3 = new Player("fer");
 
-				for (var cont=0,i=0,y=1,z=2; cont < 9; i+=3,y+=3,z+=3,cont++) {
+				for (let cont=0,i=0,y=1,z=2; cont < 9; i+=3,y+=3,z+=3,cont++) {
 					player1._onHand.push(shuffleArray[i]);
 					player2._onHand.push(shuffleArray[y]);
 					player3._onHand.push(shuffleArray[z]);
@@ -103,12 +104,12 @@ class Game{
 			case 4:
 				console.log("4 players");
 
-				var player1 = new player("felix");
-				var player2 = new player("Brayan");
-				var player3 = new player("fer");
-				var player4 = new player("rodo");
+				player1 = new player("felix");
+				player2 = new player("Brayan");
+				player3 = new player("fer");
+				player4 = new player("rodo");
 
-				for (var cont=0,i=0,y=1,z=2,w=3; cont < 8; i+=4,y+=4,z+=4,w+=4,cont++) {
+				for (let cont=0,i=0,y=1,z=2,w=3; cont < 8; i+=4,y+=4,z+=4,w+=4,cont++) {
 					player1._onHand.push(shuffleArray[i]);
 					player2._onHand.push(shuffleArray[y]);
 					player3._onHand.push(shuffleArray[z]);
@@ -124,13 +125,13 @@ class Game{
 			case 5:
 				console.log("5 players");
 
-				var player1 = new player("felix");
-				var player2 = new player("Brayan");
-				var player3 = new player("fer");
-				var player4 = new player("rodo");
-				var player5 = new player("rodo");
+				player1 = new Player("felix");
+				player2 = new Player("Brayan");
+				player3 = new Player("fer");
+				player4 = new Player("rodo");
+				player5 = new Player("rodo");
 
-				for (var cont=0,i=0,y=1,z=2,w=3,x=4; cont < 7; i+=5,y+=5,z+=5,w+=5,x+=5,cont++) {
+				for (let cont=0,i=0,y=1,z=2,w=3,x=4; cont < 7; i+=5,y+=5,z+=5,w+=5,x+=5,cont++) {
 					player1._onHand.push(shuffleArray[i]);
 					player2._onHand.push(shuffleArray[y]);
 					player3._onHand.push(shuffleArray[z]);
@@ -235,21 +236,21 @@ class Game{
 		return new Promise(function(resolve,reject){
 
 			deck = [];
-			var ref = firebase.database().ref();
-			var urlRef = ref.child("cartas");
+			let ref = firebase.database().ref();
+			let urlRef = ref.child("cartas");
 
 			urlRef.once("value", function(snapshot) {
 			  snapshot.forEach(function(child) {
 
-			    var cantidad = child.child("cantidad").val();
-			    var nombre = child.child("nombre").val();
-			    var tipo = child.child("tipo").val();
-			    var valor = child.child("valor").val();
-			    var src = child.child("src").val();
+			    let cantidad = child.child("cantidad").val();
+			    let nombre = child.child("nombre").val();
+			    let tipo = child.child("tipo").val();
+			    let valor = child.child("valor").val();
+			    let src = child.child("src").val();
 
 
-			    for (var i = 0; i < cantidad; i++) {
-				var newcard = new card(nombre,src,tipo,valor);
+			    for (let i = 0; i < cantidad; i++) {
+				let newcard = new card(nombre,src,tipo,valor);
 				deck.push(newcard);
 
 			    }
