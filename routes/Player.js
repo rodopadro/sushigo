@@ -5,6 +5,8 @@
 class Player {
 	constructor (username){
 		this._username = username;
+		this._onPlay = [];
+		this._onHand = [];
 	}
 
 	get username(){
@@ -12,11 +14,11 @@ class Player {
 	}
 
 	get hand(){
-		return this._hand;
+		return this._onHand;
 	}
 
 	set hand(hand){
-		this._hand = hand;
+		this._onHand = _onHand;
 	}
 
 	set score(score){
