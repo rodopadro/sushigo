@@ -4,44 +4,71 @@
 
 class Game{
 
-	constructor(turn, score, season){
-		this.score = score;
-		this.turn = turn;
-		this.season = season;
+	constructor(){
+		this._players = [];
+		this._counter = 0;
+		this._playersReady = 0;
 	}
 
-	static get counter(){
-		Game._counter = (Game._counter || 0) + 1;
-		return Game._counter;
+	get counter(){
+		this._counter = (this._counter || 0) + 1;
+		return this._counter;
 	}
 
-	static get reducer(){
-		if(Game._counter == 0){
-			Game._counter = 0;
+	get reducer(){
+		if(this._counter == 0){
+			this._counter = 0;
 		}else{
-			Game._counter = Game._counter - 1;
+			this._counter = this._counter - 1;
 		}
-		return Game._counter;
+		return this._counter;
 	}
 
-	static get count(){
-		return Game._counter;
+	set playersReady(value){
+		this._playersReady = value;
+	}
+
+	get playersReady(){
+		return this._playersReady;
+	}
+
+	addPlayerReady(){
+		this._playersReady += 1;
+	}
+
+	allPlayersReady(){
+		return this.playersReady == this.count;
+	}
+
+	set room(room){
+		this._room = room;
+	}
+
+	get room(){
+		return this._room;
+	}
+
+	get count(){
+		return this._counter;
 	}
 
 	isEmpty(){
-		return Game.count == 0;
+		return this.count == 0;
 	}
 
 	isFull(){
-		return Game.count == 5;
+		return this.count == 5;
 	}
 
-	addPlayer(username){
-		console.log("Player added", Game.counter);
+	addPlayer(Player){
+		//Game._players.push(Player);
+		console.log("Player added", Player, this.counter);
 	}
 
-	exitPlayer(username){
-		console.log("Player exited", Game.reducer);
+	exitPlayer(Player){
+		let index = Game._players.indexOf(Player);
+		Game._players.slice(index, 1);
+		console.log("Player exited", this.reducer);
 	}
 
 }

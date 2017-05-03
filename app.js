@@ -50,10 +50,9 @@ const server = app.listen(8080, () => console.log("Listening to localhost:", 808
 
 const io = require('socket.io')(server);
 
+let gm;
 function socketFunctions(socket){
 	let rooms = [];
-	let gm = new Game(0, 0, "Season");
-	socket.on('addPlayer', gm.addPlayer);
 
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
@@ -62,6 +61,7 @@ function socketFunctions(socket){
 	});
 
 	socket.on('createRooms', (roomName, username) => {
+		gm = new Game(roomName);
 		rooms.push(roomName);
 		socket.join(roomName);
 		socket.room = roomName;
@@ -70,11 +70,22 @@ function socketFunctions(socket){
 		console.log(`User ${username} created ${roomName}`);
 	});
 
-	socket.on('cardPicked', (card)=>{
-		socket.to(socket.room).emit('updateBoard', socket.username, card);
+	socket.on('cardPicked', (card, Player)=>{
+		socket.to(socket.room).emit('updateBoard', Player, card);
 	});
 
-	socket.on('updateScores', (score)=>{
+	socket.on('updateScores', (score, Player)=>{
+		socket.to(socket.room).emit('updateScores', Player, score);
+	});
+
+	socket.on('playerReady', (Player)=>{
+		gm.addPlayerReady();
+		if(gm.allPlayersReady()){
+			socket.to(socket.room).emit('startGame');
+		}
+	});
+
+	socket.on('startGame', ()=>{
 
 	});
 
@@ -82,6 +93,7 @@ function socketFunctions(socket){
 		if(rooms.includes(roomName)){
 			if(!gm.isFull()){
 				socket.join(roomName);
+				gm.addPlayer(username);
 				socket.emit('addPlayer', username);
 				console.log(`User ${username} joined ${roomName}`);
 			}else {
