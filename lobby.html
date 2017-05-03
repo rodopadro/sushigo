@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sushi go lobby</title>
+    <script src ="js/decks.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <script src ="js/firebase.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/lobby.css" />
+  </head>
+  <body>
+    <br>
+    <center>
+      <h1>LOBBY</h1>
+      <hr>
+
+      <button type="button" class="btn btn-default mainbut"  data-toggle="modal" data-target="#myModalCrear">Crear</button>
+      <br>
+      <br>
+      <button type="button" class="btn btn-default mainbut" data-toggle="modal" data-target="#myModalUnirse">Unirse</button>
+    </center>
+
+
+
+    <!-- Modal -->
+  <div class="modal fade" id="myModalCrear" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Crear partida</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre de la partida</label>
+            <input type="text" class="form-control" id="lobbyname" placeholder="Lobby">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Crear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="myModalUnirse" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Unirse a partida</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nombre del lobby</label>
+          <input type="text" class="form-control" id="lobbyname" placeholder="Lobby">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Unirse</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

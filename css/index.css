@@ -1,0 +1,68 @@
+body {
+  background-color: #D24848;
+}
+
+h1{
+  color: #211111;
+}
+
+h2{
+  color: #211111;
+}
+
+h3{
+  color: #211111;
+}
+h4{
+  color: #211111;
+}
+h5{
+  color: #211111;
+  margin-left: -9px;
+}
+img{
+  margin-top: 1px;
+}
+
+hr{
+  margin-top: 1px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-top: 5px solid #6C9238;
+}
+
+.cajita1{
+  border-radius: 25px;
+  background-color: #88B947;
+  color: white;
+}
+.cajita2{
+  border-radius: 25px;
+  background-color: #813223;
+  color: white;
+}
+.cajita3{
+  border-radius: 25px;
+  background-color: #452207;
+  color: white;
+}
+.cajita4{
+  border-radius: 25px;
+  background-color: #88B947;
+  color: white;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 10rem;
+}
+.carta{
+  height: 10rem;
+}
+.cartamano{
+  margin-top: 5px;
+  height: 15rem;
+  margin-bottom: 5px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}

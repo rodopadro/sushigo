@@ -2,18 +2,338 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Analizador Léxico Gráfico</title>
+    <title>Sushi go</title>
     <script src ="js/decks.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
     <script src ="js/firebase.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-
-    <button class="prueba" onclick="generateDeck();" type="button">deck</button>
-
+    <br>
+    <center>
+      <div class="row" style="width: 100%;">
+        <div class="col-md-3">
+          <div class="row cajita1" style="width: 100%;">
+            <h4>Nombre de la partida</h4>
+            <h1>Ronda No 1</h1>
+            <h2>Turno de:</h2>
+            <h3>Usuario</h3>
+          </div>
+          <br>
+          <div class="row cajita1"  style="width: 100%;  height:22rem;">
+            <h3>PUNTUACIÓN</h3>
+            <div class="row "  style="width: 100%; overflow:scroll; height:15rem;">
+              <div class="row">
+                <div class="col-sm-5 col-sm-offset-1" id="username">
+                  <h4>Usuario 1</h4>
+                </div>
+                <div class="col-sm-2 " id="points">
+                  <h4>10</h4>
+                </div>
+                <div class="col-sm-1" >
+                  <h4>PTS</h4>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-5 col-sm-offset-1" id="username">
+                  <h4>Usuario 2</h4>
+                </div>
+                <div class="col-sm-2 " id="points">
+                  <h4>10</h4>
+                </div>
+                <div class="col-sm-1" >
+                  <h4>PTS</h4>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-5 col-sm-offset-1" id="username">
+                  <h4>Usuario 3</h4>
+                </div>
+                <div class="col-sm-2 " id="points">
+                  <h4>10</h4>
+                </div>
+                <div class="col-sm-1" >
+                  <h4>PTS</h4>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-5 col-sm-offset-1" id="username">
+                  <h4>Usuario 4</h4>
+                </div>
+                <div class="col-sm-2 " id="points">
+                  <h4>10</h4>
+                </div>
+                <div class="col-sm-1" >
+                  <h4>PTS</h4>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-5 col-sm-offset-1" id="username">
+                  <h4>Usuario 5</h4>
+                </div>
+                <div class="col-sm-2 " id="points">
+                  <h4>10</h4>
+                </div>
+                <div class="col-sm-1" >
+                  <h4>PTS</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row cajita1"  style="width: 100%;  height:18rem;">
+            <h3>AMIGOS</h3>
+            <div class="row "  style="width: 100%; overflow:scroll; height:10rem;">
+              <h4>AMIGO1</h4>
+              <hr>
+              <h4>AMIGO2</h4>
+              <hr>
+              <h4>AMIGO3</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="row cajita2" style="width: 100%; height:42rem;">
+            MESA
+            <div class="row cajita2" style="width: 100%; overflow:scroll; height:39rem;">
+              <div class="row cajita3" style="width: 95%; ">
+                <div class="col-md-1 cajita4">
+                  <h5>USUARIO</h5>
+                  <h1>1</h1>
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+              </div>
+              <br>
+              <div class="row cajita3" style="width: 95%; ">
+                <div class="col-md-1 cajita4">
+                  <h5>USUARIO</h5>
+                  <h1>2</h1>
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+              </div>
+              <br>
+              <div class="row cajita3" style="width: 95%; ">
+                <div class="col-md-1 cajita4">
+                  <h5>USUARIO</h5>
+                  <h1>3</h1>
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+              </div>
+              <br>
+              <div class="row cajita3" style="width: 95%; ">
+                <div class="col-md-1 cajita4">
+                  <h5>USUARIO</h5>
+                  <h1>4</h1>
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+              </div>
+              <br>
+              <div class="row cajita3" style="width: 95%; ">
+                <div class="col-md-1 cajita4">
+                  <h5>USUARIO</h5>
+                  <h1>5</h1>
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+                <div class="col-md-1 ">
+                  <img class ="carta" src="img/sashimi.png" alt="">
+                </div>
+              </div>
+              <br>
+            </div>
+            <br>
+          </div>
+          <br>
+          <div class="row cajita2" style="width: 100%; overflow-x: auto;">
+            <div class="row cajita2" style=" width:140%;">
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+              <div class="col-md-1 ">
+                <img class ="cartamano" src="img/sashimi.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </center>
   </body>
-
 </html>
