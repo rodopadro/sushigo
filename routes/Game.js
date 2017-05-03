@@ -3,13 +3,13 @@
  */
 
 class Game{
-	
+	/*
 	//main deck array 108 cards
 	var deck=[];
 	var shuffleArray=[];
 	//array with the players objects
 	var playersArray = [];
-
+*/
 	constructor(){
 		this._players = [];
 		this._counter = 0;
