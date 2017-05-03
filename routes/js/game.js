@@ -158,22 +158,7 @@ function chooseCard(cardIndex){
 
 	}else{
 		console.log("No More Cards");
-	}
-
-
-	/*for (var i = 0; i < playersArray[0].onPlay.length; i++) {
-		console.log("onPlay"+playersArray[0].onPlay[i].name);
-	}
-	
-
-	for (var i = 0; i < playersArray[0].onHand.length; i++) {
-		console.log(playersArray[0].onHand[i].name);
-	}*/
-
-	console.log(playersArray[0].onHand.length);
-	console.log(playersArray[0].onHand);
-	console.log(playersArray[0].onPlay.length);
-	console.log(playersArray[0].onPlay);
+	]
 	
 	return playersArray[0].onHand;
 	
