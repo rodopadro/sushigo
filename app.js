@@ -53,6 +53,9 @@ const io = require('socket.io')(server);
 
 let gm;
 let rooms = [];
+let tmp = [];
+let counter = 0;
+let tmp2 = [];
 
 function socketFunctions(socket){
 	console.log('user connected');
@@ -63,25 +66,35 @@ function socketFunctions(socket){
 		gm.exitPlayer();
 	});
 
-	socket.on('createRooms', (roomName, username) => {
+	socket.on('createRoom', (roomName, username) => {
 		gm = new Game(roomName);
 		rooms.push(roomName);
 		socket.join(roomName);
 		socket.room = roomName;
 		socket.index = gm.count;
+		console.log(rooms);
+		console.log(socket.index);
 		gm.addPlayer(username);
 		socket.username = username;
-		socket.to(roomName).emit('addPlayer', username);
+		socket.emit('addPlayer', username);
 		console.log(`User ${username} created ${roomName}`);
-
 	});
 
 	socket.on('cardPicked', (card, username, index)=>{
-		gm.player[socket.index].hand.splice(index, 1);
-		gm.switchHand();
-		let player = gm.players[socket.index];
-		socket.emit('updateHand', player.username, player.hand);
-		socket.to(socket.room).emit('updateBoard', username, card);
+		gm.players[socket.index].hand.splice(index, 1);
+		tmp2.push(socket);
+		if(counter++ == gm.count){
+			gm.switchHand();
+			for(let i = 1; i < gm.count; i++){
+				let player = gm.players[tmp2[i].index];
+				tmp2[i].emit('updateHand', player.username, player.hand);
+				tmp2[i].emit('updateBoard', player.username, player.hand[index]);
+				tmp2[i].to(socket.room).broadcast.emit('updateBoard', player.username, player.hand[index]);
+			}
+			tmp2 = [];
+			counter = 0;
+		}
+
 	});
 
 	socket.on('scoreCalculated', (score, Player)=>{
@@ -90,12 +103,16 @@ function socketFunctions(socket){
 
 	socket.on('playerReady', ()=>{
 		gm.addPlayerReady();
+		tmp.push(socket);
 		if(gm.count > 1){
 			if(gm.allPlayersReady()){
+				socket.to(socket.room).broadcast.emit('fillTables', gm.players);
 				gm.startGame();
-				let player = gm.players[socket.index];
-				//let player = gm.players[0];
-				socket.emit('updateHand', player.username, player.hand);
+				let player;
+				for(let i = 0; i < tmp.length; i++){
+					player = gm.players[tmp[i].index];
+					tmp[i].emit('updateHand', player.username, player.hand);
+				}
 			}
 		}
 	});
@@ -104,18 +121,23 @@ function socketFunctions(socket){
 		if(rooms.includes(roomName)){
 			if(!gm.isFull()){
 				socket.join(roomName);
-				socket.room = roomName;
+				socket.room= roomName;
 				socket.username = username;
 				socket.index = gm.count;
-				gm.addPlayer(username);
+
 				socket.index = gm.count;
+				for(let i = 0; i < gm.count; i++){
+					socket.emit('addPlayer', gm.players[i].username);
+				}
+				gm.addPlayer(username);
 				socket.emit('addPlayer', username);
+				socket.to(socket.room).broadcast.emit('addPlayer', username);
 				console.log(`User ${username} joined ${roomName}`);
 			}else {
-				socket.emit('error', 'This room is full');
+
 			}
 		}else{
-			socket.emit('error', 'There is not such room');
+
 		}
 	});
 

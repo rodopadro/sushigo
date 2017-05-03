@@ -3,13 +3,13 @@
  */
 
 function create(){
-	let name = $( "#lobbyname" ).val();
+	let name = $( "#lobbyname1" ).val();
 	sessionStorage.setItem('tipo', 'create');
 	sessionStorage.setItem('id', name);
 }
 
 function join(){
-	let name = $( "#lobbyname" ).val();
-	sessionStorage.setItem('tipo', 'join')
-	sessionStorage.setItem('id', name)
+	let name = $( "#lobbyname2" ).val();
+	sessionStorage.setItem('tipo', 'join');
+	sessionStorage.setItem('id', name);
 }

@@ -89,18 +89,18 @@ class Game{
 
 	addPlayer(username){
 		let newPlayer = new Player(username);
-		this._players[this.count] = newPlayer;
+		this.players[this.count] = newPlayer;
 		console.log("Player added", newPlayer.username, this.counter);
 	}
 
 	exitPlayer(Player){
-		let index = Game._players.indexOf(Player);
-		this._players.splice(index, 1);
+		let index = this.players.indexOf(Player);
+		this.players.splice(index, 1);
 		console.log("Player exited", this.reducer);
 	}
 
 	switchHand(){
-		let tmp = this.player[0].hand;
+		let tmp = this.players[0].hand;
 		for(let i = 1; i < this.count; i++){
 			this.players[i-1].hand = this.players[i].hand;
 		}

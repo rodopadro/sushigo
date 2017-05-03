@@ -18,7 +18,7 @@ class Player {
 	}
 
 	set hand(hand){
-		this._onHand = _onHand;
+		this._onHand = hand;
 	}
 
 	set score(score){
