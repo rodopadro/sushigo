@@ -1,0 +1,79 @@
+{
+  "1":{
+  "cantidad":12,
+  "nombre":"Maki roll 2",
+  "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/maki2.png?alt=media&token=23cc0668-fc3c-4ceb-aaf1-ea92ad2066a4",
+  "tipo":"maki_roll",
+  "valor":2
+  },
+  "2": {
+    "cantidad":8,
+    "nombre":"Maki Roll 3",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/maki3.png?alt=media&token=d1f2cf27-0aeb-4702-a4a1-46d26f2775b4",
+    "tipo":"maki_roll",
+    "valor":3
+  },
+  "3":{
+    "cantidad":5,
+    "nombre":"Egg Nigiri",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/niggirihuevo.png?alt=media&token=cdc92ca3-3a25-442e-ad39-9af4e3adc13c",
+    "tipo":"nigiri_egg",
+    "valor":1
+  },
+  "4":{
+    "cantidad":18,
+    "nombre":"Dumpling",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/dumpling.png?alt=media&token=b5a88d09-94d0-4ee2-8b62-dd675f7e755e",
+    "tipo":"dumpling",
+    "valor":1
+  },
+  "5":{
+    "cantidad":14,
+    "nombre":"Sashimi",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/sashimi.png?alt=media&token=78961c6b-560c-4798-b2b0-4f6d4eaf3963",
+    "tipo":"sashimi",
+    "valor":1
+  },
+  "6":{
+    "cantidad":6,
+    "nombre":"Wasabi",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/wasabi.png?alt=media&token=daafcf24-c0a2-4d69-956b-cbe62e281e00",
+    "tipo":"wasabi",
+    "valor":1
+  },
+  "7":{
+    "cantidad":10,
+    "nombre":"Salmon Nigiri",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/niggirisalmon.png?alt=media&token=f32a0cf6-f5da-4e85-85aa-eceaf0ee6d52",
+    "tipo":"nigiri_salmon",
+    "valor":2
+  },
+  "8":{
+    "cantidad":14,
+    "nombre":"Tempura",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/tempura.png?alt=media&token=0c741dfb-cd90-4c34-ab09-0af44e800967",
+    "tipo":"tempura",
+    "valor":1
+  },
+  "9":{
+    "cantidad":6,
+    "nombre":"Maki roll",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/maki1.png?alt=media&token=1b255fe7-6e88-48b1-b7ba-c69e6c64e074",
+    "tipo":"maki_roll",
+    "valor":1
+  },
+  "10":{
+    "cantidad":5,
+    "nombre":"Squid Nigiri",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/niggiricalamar.png?alt=media&token=8c3f818c-3934-4e75-ae48-a75bc8ebd69b",
+    "tipo":"nigiri_squid",
+    "valor":3
+  },
+  "11" :{
+    "cantidad":10,
+    "nombre":"Pudding",
+    "src":"https://firebasestorage.googleapis.com/v0/b/sushigo-dcf8d.appspot.com/o/pudin.png?alt=media&token=ad26c796-0043-4381-9b76-d130934ffa18",
+    "tipo":"pudding",
+    "valor":1
+  }
+}

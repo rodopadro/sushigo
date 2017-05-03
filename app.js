@@ -10,6 +10,7 @@ const config = require('./config');
 const index = require('./routes/index');
 const users = require('./routes/users');
 import {Game} from './routes/Game';
+import {Card} from './routes/Card';
 
 const app = express();
 
@@ -54,6 +55,7 @@ let gm;
 let rooms = [];
 
 function socketFunctions(socket){
+	console.log('user connected');
 
 	socket.on('disconnect', () => {
 		console.log('user disconnected');
@@ -66,36 +68,47 @@ function socketFunctions(socket){
 		rooms.push(roomName);
 		socket.join(roomName);
 		socket.room = roomName;
+		socket.index = gm.count;
+		gm.addPlayer(username);
 		socket.username = username;
 		socket.to(roomName).emit('addPlayer', username);
 		console.log(`User ${username} created ${roomName}`);
 
 	});
 
-	socket.on('cardPicked', (card, Player)=>{
-		socket.to(socket.room).emit('updateBoard', Player, card);
+	socket.on('cardPicked', (card, username, index)=>{
+		gm.player[socket.index].hand.splice(index, 1);
+		gm.switchHand();
+		let player = gm.players[socket.index];
+		socket.emit('updateHand', player.username, player.hand);
+		socket.to(socket.room).emit('updateBoard', username, card);
 	});
 
-	socket.on('updateScores', (score, Player)=>{
+	socket.on('scoreCalculated', (score, Player)=>{
 		socket.to(socket.room).emit('updateScores', Player, score);
 	});
 
 	socket.on('playerReady', ()=>{
 		gm.addPlayerReady();
-		if(gm.allPlayersReady()){
-			socket.to(socket.room).emit('startGame');
+		if(gm.count > 1){
+			if(gm.allPlayersReady()){
+				gm.startGame();
+				let player = gm.players[socket.index];
+				//let player = gm.players[0];
+				socket.emit('updateHand', player.username, player.hand);
+			}
 		}
-	});
-
-	socket.on('startGame', ()=>{
-		gm.startGame();
 	});
 
 	socket.on('connectToRoom', (roomName, username)=>{
 		if(rooms.includes(roomName)){
 			if(!gm.isFull()){
 				socket.join(roomName);
+				socket.room = roomName;
+				socket.username = username;
+				socket.index = gm.count;
 				gm.addPlayer(username);
+				socket.index = gm.count;
 				socket.emit('addPlayer', username);
 				console.log(`User ${username} joined ${roomName}`);
 			}else {

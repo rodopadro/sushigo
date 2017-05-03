@@ -1,42 +1,25 @@
 class Card {
 	constructor(nombre,src,tipo,valor){
-			this.name = nombre;
-			this.src = src;
-			this.type = tipo;
-			this.value = valor;
+			this._name = nombre;
+			this._src = src;
+			this._type = tipo;
+			this._value = valor;
 	}
 
 	get cardname(){
-		return this.name;
-	}
-
-	set cardname(nombre){
-		this.name = nombre;
+		return this._name;
 	}
 
 	get src(){
-		return this.src;
+		return this._src;
 	}
 
-	set src(src){
-		this.src = src;
-	}
-  
-  get type(){
-		return this.type;
+    get type(){
+		return this._type;
 	}
 
-	set type(tipo){
-		this.type = tipo;
+    get value(){
+		return this._value;
 	}
-  
-  get value(){
-		return this.value;
-	}
-
-	set value(valor){
-		this.value = valor;
-	}
-  
 }
 export {Card};

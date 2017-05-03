@@ -3,7 +3,7 @@
  */
 import {Player} from './Player';
 import {Card} from './Card';
-const firebase = require('firebase');
+import {Deck} from './Deck';
 
 class Game{
 
@@ -12,90 +12,28 @@ class Game{
 		this._counter = 0;
 		this._deck = [];
 		this._playersReady = 0;
-		this._shuffleArray = [];
-	}
-	
-	shuffle(array){
-	  	let currentIndex = array.length, temporaryValue, randomIndex;
-
-		  // While there remain elements to shuffle...
-		  while (0 !== currentIndex) {
-
-			    // Pick a remaining element...
-			    randomIndex = Math.floor(Math.random() * currentIndex);
-			    currentIndex -= 1;
-
-			    // And swap it with the current element.
-			    temporaryValue = array[currentIndex];
-			    array[currentIndex] = array[randomIndex];
-			    array[randomIndex] = temporaryValue;
-		 }
-
-  		return array;
+		this._deck = new Deck();
+		this._deckposition = 0;
 	}
 
-	initDeck(){
-		this.generator();
-		this._shuffleArray = shuffle(this._deck);
-		for (let i = 0; i < 9; i++) {
-			console.log(this._shuffleArray[i].name);
-		}
+	get deckposition(){
+		return this._deckposition;
 	}
 
-	startGame(numplayers){
-		this.initDeck();
+	set deckposition(pos){
+		this._deckposition = pos;
+	}
 
-		switch(this.count){
-			case 2:
-				console.log("2 players");
-
-				for (let i=0; i < 20; i++) {
-					this._players[0]._onHand[i]= this._shuffleArray[i++];
-					this._players[1]._onHand[i] = this._shuffleArray[i];
-				}
-
-				break;
-			case 3:
-				console.log("3 players");
-
-				for (let i=0; i < 27; i++) {
-					this._players[0]._onHand[i]= this._shuffleArray[i++];
-					this._players[1]._onHand[i] = this._shuffleArray[i++];
-					this._players[2]._onHand[i] = this._shuffleArray[i];
-				}
-
-				break;
-			case 4:
-				console.log("4 players");
-
-				for (let i=0; i < 32; i++) {
-
-					this._players[0]._onHand[i]= this._shuffleArray[i++];
-					this._players[1]._onHand[i] = this._shuffleArray[i++];
-					this._players[2]._onHand[i] = this._shuffleArray[i++];
-					this._players[3]._onHand[i] = this._shuffleArray[i];
-				}
-
-				break;
-			case 5:
-				console.log("5 players");
-
-				for (let i=0; i < 42; i++) {
-					this._players[0]._onHand[i]= this._shuffleArray[i++];
-					this._players[1]._onHand[i] = this._shuffleArray[i++];
-					this._players[2]._onHand[i] = this._shuffleArray[i++];
-					this._players[3]._onHand[i] = this._shuffleArray[i++];
-					this._players[4]._onHand[i] = this._shuffleArray[i];
-				}
-				break;
-			default:
-				break;
-		}
-
+	get deck(){
+		return this._deck;
 	}
 
 	set deck(deck){
 		this._deck = deck;
+	}
+
+	get players(){
+		return this._players;
 	}
 	
 
@@ -149,55 +87,80 @@ class Game{
 		return this.count == 5;
 	}
 
-	addPlayer(Player){
-		this._players[this.count] = Player;
-		console.log("Player added", Player, this.counter);
+	addPlayer(username){
+		let newPlayer = new Player(username);
+		this._players[this.count] = newPlayer;
+		console.log("Player added", newPlayer.username, this.counter);
 	}
 
 	exitPlayer(Player){
 		let index = Game._players.indexOf(Player);
-		this._players.slice(index, 1);
+		this._players.splice(index, 1);
 		console.log("Player exited", this.reducer);
 	}
 
-	//GET DATA FROM FIREBASE----------------------------------------------------
-	generateDeck(){
-		return new Promise(function(resolve, reject){
-
-			deck = [];
-			let ref = firebase.database().ref();
-			let urlRef = ref.child("cartas");
-
-			urlRef.once("value", function(snapshot) {
-			  snapshot.forEach(function(child) {
-
-			    let cantidad = child.child("cantidad").val();
-			    let nombre = child.child("nombre").val();
-			    let tipo = child.child("tipo").val();
-			    let valor = child.child("valor").val();
-			    let src = child.child("src").val();
-			    let newcard;
-
-			    for (let i = 0; i < cantidad; i++) {
-					newcard = new Card(nombre,src,tipo,valor);
-					this._deck.push(newcard);
-			    }
-
-
-			   });
-				resolve(deck);
-			});
-		});
-	
-	};
-
-	generator(){
-		this.generateDeck().then((newdeck) => {
-			console.log("primera carta: " + newdeck[107].type);
-			this.deck = newdeck;
-			console.log();
-		});
+	switchHand(){
+		let tmp = this.player[0].hand;
+		for(let i = 1; i < this.count; i++){
+			this.players[i-1].hand = this.players[i].hand;
+		}
+		this.players[this.count -1].hand = tmp;
 	}
+
+	startGame(){
+		console.log("Hola despues de init");
+		this.deck.initDeck();
+		switch(this.count){
+			case 2:
+				console.log("2 players");
+
+				for (let i=0, count = 0; i < 20; i++, count++) {
+					this.players[0].hand[count]= this.deck.deck[i++];
+					this.players[1].hand[count] = this.deck.deck[i];
+				}
+				this.deckposition += 20;
+
+				break;
+			case 3:
+				console.log("3 players");
+
+				for (let i=0, count = 0; i < 27; i++, count++) {
+					this.players[0].hand[count]= this.deck.deck[i++];
+					this.players[1].hand[count] = this.deck.deck[i++];
+					this.players[2].hand[count] = this.deck.deck[i];
+				}
+
+				break;
+			case 4:
+				console.log("4 players");
+
+				for (let i=0, count = 0; i < 32; i++, count++) {
+
+					this.players[0].hand[count]= this.deck.deck[i++];
+					this.players[1].hand[count] = this.deck.deck[i++];
+					this.players[2].hand[count] = this.deck.deck[i++];
+					this.players[3].hand[count] = this.deck.deck[i];
+				}
+
+				break;
+			case 5:
+				console.log("5 players");
+
+				for (let i=0, count = 0; i < 35; i++, count++) {
+					this.players[0].hand[count]= this.deck.deck[i++];
+					this.players[1].hand[count] = this.deck.deck[i++];
+					this.players[2].hand[count] = this.deck.deck[i++];
+					this.players[3].hand[count] = this.deck.deck[i++];
+					this.players[4].hand[count] = this.deck.deck[i];
+				}
+				break;
+			default:
+				console.log("No suficientes players");
+				break;
+		}
+
+	}
+
 
 }
 
