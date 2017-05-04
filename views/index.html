@@ -13,6 +13,9 @@
 </head>
 <body>
 <br>
+ <header>
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-bottom: 20px;margin-left: 1800px;"onclick="logOut()">log Out</button>
+      </header>
 <center>
   <button type="button" name="button" onclick="ready()">Play</button>
   <div class="row" style="width: 100%;">
@@ -53,6 +56,31 @@
 
     </div>
   </div>
+  <center>
+        <button type="button" class="btn btn-default mainbut"  data-toggle="modal" data-target="#myModalCrear">Agregar Amigos</button>
+      </center>
+
+       <!-- Modal -->
+    <div class="modal fade" id="myModalCrear" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Agregar Amigo</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Buscar Amigos</label>
+              <input type="text" class="form-control" id="friendsname" placeholder="Nombre">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="searchFriend()">buscar</button>
+          </div>
+        </div>
+      </div>
+
   </div>
 </center>
 </body>
