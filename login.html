@@ -29,12 +29,12 @@
 
     <!--CSS-->
     <link rel="stylesheet" href="css/login.css" />
-    <link rel="stylesheet" src="main.css">
+    <link rel="stylesheet" src="main.css"/>
 
 
 
   <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-  <script>
+ <script>
     // Initialize Firebase
     var config = {
       apiKey: "AIzaSyCGsjiw6NUqH1IMV5LW7cB6WAUFfhcc7Os",
@@ -48,10 +48,10 @@
   </script>
 
     <script type="text/javascript">
-      /**
+/**
        * Handles the sign in button press.
        */
-      var userId;
+       var userId;
       function toggleSignIn() {
         if (firebase.auth().currentUser) {
           // [START signout]
@@ -86,15 +86,25 @@
           });
           // [END authwithemail]
         }
+        firebase.auth().onAuthStateChanged(function(user) {
+        if(user){
+          window.location="lobby.html";
+        }
+      });
         //document.getElementById('quickstart-sign-in').disabled = true;
       }
       /**
        * Handles the sign up button press.
        */
+       var flag = false;
       function handleSignUp() {
         var name = document.getElementById('exampleInputName1').value;
         var email = document.getElementById('exampleInputEmail1').value;
         var password = document.getElementById('exampleInputPassword1').value;
+        if (name.length < 1) {
+          alert('Please enter an email address.');
+          return;
+        }
         if (email.length < 4) {
           alert('Please enter an email address.');
           return;
@@ -120,16 +130,23 @@
           // [END_EXCLUDE]
         });
         // [END createwithemail]
-         var name = document.getElementById('exampleInputName1').value;
+        alert("Usuario creado");
+        firebase.auth().onAuthStateChanged(function(user) {
+          if(user){
+            var name = document.getElementById('exampleInputName1').value;
             var email = document.getElementById('exampleInputEmail1').value;
             var password = document.getElementById('exampleInputPassword1').value;
+            userId = firebase.auth().currentUser.uid;
             firebase.database().ref('Users/' + userId).set({
-              username: name,
-              email: email,
-              password: password,
-              score:0,
-              frieds:""
+            username: name,
+            email: email,
+            password: password,
+            score: 0,
+            friends: ""
             });
+          }
+        });
+        //redirect();
       }
       /**
        * Sends an email verification to the user.
@@ -150,16 +167,37 @@
           if (user) {
             // User is signed in.
             // [START_EXCLUDE]
-            userId = firebase.auth().currentUser.uid;
-            console.log(userId);
+            var displayName = user.displayName;
+            var email = user.email;
+            var emailVerified = user.emailVerified;
+            var photoURL = user.photoURL;
+            var isAnonymous = user.isAnonymous;
+            var uid = user.uid;
+            var providerData = user.providerData;
+
+            console.log("adentro");
+              /*var name = document.getElementById('exampleInputName1').value;
+              var email = document.getElementById('exampleInputEmail1').value;
+              var password = document.getElementById('exampleInputPassword1').value;
+              userId = firebase.auth().currentUser.uid;
+              console.log(userId);
+              firebase.database().ref('Users/' + userId).set({
+                username: name,
+                email: email,
+                password: password,
+                score: 0,
+                friends: ""
+                });*/
+            
             document.getElementById('quickstart-sign-in-status').textContent = 'Signed in';
-            //document.getElementById('quickstart-sign-in').textContent = 'Sign out';
+            document.getElementById('quickstart-sign-in').textContent = 'Sign in';
             // [END_EXCLUDE]
           } else {
             // User is signed out.
             // [START_EXCLUDE]
+            console.log("not loged in!");
             document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
-            //document.getElementById('quickstart-sign-in').textContent = 'Sign in';
+            document.getElementById('quickstart-sign-in').textContent = 'Sign in';
             document.getElementById('quickstart-account-details').textContent = 'null';
             // [END_EXCLUDE]
           }
@@ -174,6 +212,7 @@
       window.onload = function() {
         initApp();
       };
+
     </script>
 
    
@@ -199,10 +238,9 @@
           </div>
           <button type="submit" class="btn btn-default loginbut" id="quickstart-sign-in">Login</button>
           <button type="submit" class="btn btn-default loginbut" id="quickstart-sign-up">Registrarse</button>
-          <button type="submit" class="btn btn-default loginbutFac" id="facebook-sign-in">Facebook login</button>
         </div>
         <br>
-         <div class="quickstart-user-details-container" style="display:inline;">
+         <div class="quickstart-user-details-container" style="display:none;">
               Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
               <div>Firebase auth <code>currentUser</code> object value:</div>
               <pre><code id="quickstart-account-details">null</code></pre>
