@@ -101,8 +101,8 @@ class Game{
 
 	switchHand(){
 		let tmp = this.players[0].hand;
-		for(let i = 1; i < this.count; i++){
-			this.players[i-1].hand = this.players[i].hand;
+		for(let i = 0; i < this.count-1; i++){
+			this.players[i].hand = this.players[i+1].hand;
 		}
 		this.players[this.count -1].hand = tmp;
 	}

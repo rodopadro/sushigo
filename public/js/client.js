@@ -20,7 +20,6 @@ socket.on('updateScores', (Player, score)=>{
 });
 
 socket.on('updateBoard', (Player, card) => {
-
 	fillRow(Player,card);
 });
 
@@ -59,7 +58,7 @@ function populateScore(){
 }
 
 function addPlayer(player){
-	let p = '<div class="row"><div class="col-sm-5 col-sm-offset-1" id="punt'+player+'"><h4>'+player+'</h4></div><div class="col-sm-2 " id="points'+player+'"><h4>'+0+'</h4></div><div class="col-sm-1" ><h4>PTS</h4></div></div><hr>'
+	let p = '<div class="row"><div class="col-sm-5 col-sm-offset-1" id="punt'+player+'"><h4>'+ player +'</h4></div><div class="col-sm-2 " id="points'+player+'"><h4>'+0+'</h4></div><div class="col-sm-1" ><h4>PTS</h4></div></div><hr>'
 	$( "#puntuacion" ).append(p);
 }
 
@@ -79,7 +78,7 @@ function fillRow(user,card){
 	console.log(card);
 	console.log(card._src);
 	let usr = user + 1;
-	let carta = '<div class="col-md-1 "><img class ="carta" src="'+card._src+'" alt=""></div>'
+	let carta = '<div class="col-md-1 "><img class ="carta" src="'+card._src+'" alt=""></div>';
 	$( "#tabla"+usr ).append(carta);
 }
 

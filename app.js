@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 
 const config = require('./config');
 const index = require('./routes/index');
-const users = require('./routes/users');
 import {Game} from './routes/Game';
 import {Card} from './routes/Card';
 
@@ -27,7 +26,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -54,7 +52,7 @@ const io = require('socket.io')(server);
 let gm;
 let rooms = [];
 let tmp = [];
-let counter = 0;
+let counter = 1;
 let tmp2 = [];
 
 function socketFunctions(socket){
@@ -81,19 +79,18 @@ function socketFunctions(socket){
 	});
 
 	socket.on('cardPicked', (card, username, index)=>{
-
 		socket.emit('updateBoard', socket.index, card);
 		socket.to(socket.room).broadcast.emit('updateBoard', socket.index, card);
 		gm.players[socket.index].hand.splice(index, 1);
 		tmp2.push(socket);
 		if(counter++ == gm.count){
 			gm.switchHand();
-			for(let i = 0; i < gm.count; i++){
+			for(let i = 0; i < tmp2.length; i++){
 				let player = gm.players[tmp2[i].index];
 				tmp2[i].emit('updateHand', player.username, player.hand);
 			}
 			tmp2 = [];
-			counter = 0;
+			counter = 1;
 		}
 
 	});
@@ -125,7 +122,6 @@ function socketFunctions(socket){
 				socket.username = username;
 				socket.index = gm.count;
 
-				socket.index = gm.count;
 				for(let i = 0; i < gm.count; i++){
 					socket.emit('addPlayer', gm.players[i].username);
 				}
