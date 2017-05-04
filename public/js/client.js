@@ -20,8 +20,8 @@ socket.on('updateScores', (Player, score)=>{
 });
 
 socket.on('updateBoard', (Player, card) => {
-	console.log(card);
-	fillRow(Player,card.src);
+
+	fillRow(Player,card);
 });
 
 socket.on('updateHand', (username, Hand)=>{
@@ -34,13 +34,14 @@ function populateHand(hand){
 	$( "#hand" ).empty();
 	myhand = hand;
 	for (let i = 0; i < hand.length; i++) {
-		let cartamano = '<div class="col-md-1 contecarta" id="Hand'+i+'"><img class ="cartamano" src="'+hand[i]._src+'" alt=""></div>'
+		let cartamano = '<div class="col-md-1  contecarta" value = "'+i+'" id="Hand'+i+'"><img class ="cartamano" src="'+hand[i]._src+'" alt=""></div>'
 		$( "#hand" ).append(cartamano);
 	}
 	$('div.contecarta').click(function() {
 		let id = $(this).attr('id');
-		console.log(myhand[id]);
-		socket.emit('cardPicked', myhand[id], username, id);
+		let idr = $(this).attr('value');
+		console.log(myhand[idr]);
+		socket.emit('cardPicked', myhand[idr], username, idr);
 		$( "#"+id ).remove();
 		console.log("Removiendo lugar:" + id);
 
@@ -74,8 +75,12 @@ function fillTables(username, card){
 }
 
 function fillRow(user,card){
-	let carta = '<div class="col-md-1 "><img class ="carta" src="'+card.src+'" alt=""></div>'
-	$( "#tabla"+user ).append(carta);
+	console.log("hola");
+	console.log(card);
+	console.log(card._src);
+	let usr = user + 1;
+	let carta = '<div class="col-md-1 "><img class ="carta" src="'+card._src+'" alt=""></div>'
+	$( "#tabla"+usr ).append(carta);
 }
 
 function populateFriends(){

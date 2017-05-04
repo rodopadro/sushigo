@@ -81,18 +81,16 @@ function socketFunctions(socket){
 	});
 
 	socket.on('cardPicked', (card, username, index)=>{
-		console.log(card);
-		console.log(index);
+
+		socket.emit('updateBoard', socket.index, card);
+		socket.to(socket.room).broadcast.emit('updateBoard', socket.index, card);
 		gm.players[socket.index].hand.splice(index, 1);
 		tmp2.push(socket);
 		if(counter++ == gm.count){
 			gm.switchHand();
-			for(let i = 1; i < gm.count; i++){
+			for(let i = 0; i < gm.count; i++){
 				let player = gm.players[tmp2[i].index];
-				console.log(player.hand[index]);
 				tmp2[i].emit('updateHand', player.username, player.hand);
-				tmp2[i].emit('updateBoard', player.username, player.hand[index]);
-				tmp2[i].to(socket.room).broadcast.emit('updateBoard', player.username, player.hand[index]);
 			}
 			tmp2 = [];
 			counter = 0;
@@ -109,7 +107,6 @@ function socketFunctions(socket){
 		tmp.push(socket);
 		if(gm.count > 1){
 			if(gm.allPlayersReady()){
-				socket.to(socket.room).broadcast.emit('fillTables', gm.players);
 				gm.startGame();
 				let player;
 				for(let i = 0; i < tmp.length; i++){
